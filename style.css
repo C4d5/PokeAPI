@@ -1,0 +1,358 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #fafafa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 100% da altura visível do ecrã */
+    margin: 0;
+    transition: background-color 0.3s;
+}
+
+/* Header alinhado igual ao desenho */
+.main-header {
+    background-color: #a10b0b;;
+    border-bottom: 4px solid #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    width: 100%; /* Garante que ocupa toda a largura */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #000;
+    cursor: pointer;
+}
+
+/* Ícones no canto direito */
+.nav-icons {
+    display: flex;
+    gap: 15px;
+}
+
+/* Transforma o botão numa área transparente sem bordas nem quadrados */
+.nav-icons button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s; /* Mantém apenas a animação de zoom */
+}
+
+
+.nav-icons button:hover {
+    transform: scale(1.15);
+}
+
+/* Conteúdo */
+.content {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+    background: transparent; 
+    border: none;
+    flex: 1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.tela h2 {
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   MÉTODO ALTERNATIVO: FILTROS DE COR (SEM ANIMAÇÃO)
+   ========================================= */
+
+/* Mantém os tamanhos exatos que tinhas */
+.img { width: 70px; height: auto; }
+.img2 { width: 50px; height: auto; }
+.img3 { width: 63px; height: auto; }
+.img4 { width: 70px; height: auto; }
+.img5 { width: 55px; height: auto; }
+
+
+.nav-icons button img {
+    transition: none !important; 
+}
+
+/* Tema Ultra Ball (Amarelo) */
+body.theme-ultraball .nav-icons button img {
+    filter: brightness(0) saturate(100%) invert(84%) sepia(51%) saturate(542%) hue-rotate(357deg) brightness(102%) contrast(104%);
+}
+
+body.theme-greatball .nav-icons button img {
+    filter: brightness(0) saturate(100%) invert(18%) sepia(82%) saturate(4681%) hue-rotate(346deg) brightness(70%) contrast(93%);
+}
+
+/* Tema Master Ball (Rosa) */
+body.theme-masterball .nav-icons button img {
+    filter: brightness(0) saturate(100%) invert(73%) sepia(34%) saturate(2256%) hue-rotate(293deg) brightness(101%) contrast(101%);
+}
+
+
+/* Estilo do Rodapé */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #a10b0b;
+    border-top: 4px solid #020202;
+    font-size: 14px;
+    color: #000000;
+    width: 100%;
+}
+
+body.theme-ultraball {
+    background-color: #ffffff;
+}
+
+body.theme-ultraball .main-header, 
+body.theme-ultraball .main-footer {
+    background-color: #111111; /* Preto Ultra Ball */
+    border-color: #ffcc00;     /* Amarelo Ultra Ball */
+    color: #ffcc00;
+}
+
+body.theme-ultraball .main-footer {
+    color: #ffcc00;            /* Garante que o texto do rodapé fica amarelo legível */
+}
+
+body.theme-ultraball .logo {
+    color: #ffcc00;            /* Logo amarelo */
+}
+
+/* --- TEMA 3: Master Ball (Roxo e Rosa) --- */
+body.theme-masterball {
+    background-color: #ffffff;
+}
+
+body.theme-masterball .main-header, 
+body.theme-masterball .main-footer {
+    background-color: #6b2d99; /* Roxo Master Ball */
+    border-color: #ff66cc;     /* Rosa Master Ball */
+}
+
+body.theme-masterball .main-footer {
+    color: #ff66cc;            /* Garante que o texto do rodapé fica rosa legível */
+}
+
+body.theme-masterball .logo {
+    color: #ff66cc;            /* Logo rosa */
+}
+
+/* --- TEMA 4: Great Ball (azul e vermelho) --- */
+body.theme-greatball {
+    background-color: #ffffff;
+}
+
+body.theme-greatball .main-header, 
+body.theme-greatball .main-footer {
+    background-color: #2e53a1; /* Roxo Master Ball */
+    border-color: #9b2020;     /* Rosa Master Ball */
+}
+
+body.theme-greatball .main-footer {
+    color: #9b2020;            /* Garante que o texto do rodapé fica rosa legível */
+}
+
+body.theme-greatball .logo {
+    color: #9b2020;            /* Logo rosa */
+}
+
+/* Container da Pokedex no fluxo normal da página (abaixo do header) */
+#tela-pokedex {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Barra de pesquisa */
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.search-bar-container input {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: 2px solid #ccc;
+    outline: none;
+}
+
+/* Grelha dos Pokémon com scroll */
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilo do card */
+.pokemon-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 180px;
+    box-sizing: border-box;
+}
+
+/* Controla rigorosamente o tamanho da imagem dentro do card */
+.pokemon-card img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+/* Estilo para textos ou avisos caso apareçam sozinhos na grelha */
+.pokemon-grid > p {
+    grid-column: 1 / -1;
+    text-align: center;
+    width: 100%;
+}
+
+/* Container dos tipos dentro do card */
+.pokemon-types {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+/* Estilo base de cada badge de tipo */
+.tipo {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    color: #fff;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+/* Cores oficiais clássicas para os tipos de Pokémon mais comuns */
+.tipo.grass { background-color: #9bcc50; }
+.tipo.poison { background-color: #b97fc9; }
+.tipo.fire { background-color: #fd7d24; }
+.tipo.water { background-color: #4592c4; }
+.tipo.bug { background-color: #729f3f; }
+.tipo.normal { background-color: #a4acaf; }
+.tipo.electric { background-color: #eed535; color: #333; }
+.tipo.ground { background-color: #ab9842; }
+.tipo.fairy { background-color: #fdb9e9; color: #333; }
+.tipo.fighting { background-color: #d56723; }
+.tipo.psychic { background-color: #f366b9; }
+.tipo.rock { background-color: #a38c21; }
+.tipo.ghost { background-color: #7b62a3; }
+.tipo.ice { background-color: #51c4e7; }
+.tipo.dragon { background-color: #53a4cf; }
+
+
+.banner-lateral {
+    position: fixed;       
+    top: 53%;              
+    transform: translateY(-50%); 
+    width: 400px;          
+    z-index: 1000;         
+    background: transparent; /* Garante que não há fundo branco */
+    border: none;            /* Remove qualquer borda */
+    box-shadow: none;        /* Remove qualquer sombra em redor da caixa */
+    padding: 0;              /* Remove espaçamento interno */
+}
+
+.banner-lateral img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: transparent;
+    border-radius: 0;        /* Se quiseres retirar os cantos arredondados brancos, podes por 0 ou manter se gostares */
+    border: none;
+    box-shadow: none;
+}
+
+/* Colado na margem esquerda */
+.banner-esq {
+    left: 40px;
+}
+
+/* Colado na margem direita */
+.banner-dir {
+    right: 40px;
+}
+
+
+
+/* Em ecrãs mais estreitos, esconde os anúncios para não sobrepor o conteúdo central */
+@media (max-width: 1250px) {
+    .banner-lateral {
+        display: none !important;
+    }
+}
+
+/* Container geral do mini-game */
+.pokemon-game-wrapper {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* A caixa agora adapta-se exatamente à proporção da imagem de fundo */
+.whos-that-pokemon-box {
+    position: relative;
+    background: url('imagens/quemépokemon.jpg') no-repeat center center;
+    background-size: cover;
+    width: 750px;  /* Largura exata da caixa */
+    height: 500px; /* Altura exata da caixa */
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4)
+}
+
+.pokemon-slot-fixo {
+    position: absolute;
+    top: 37%;
+    left: 24%; /* Ajusta para a esquerda ou direita se quiseres centrar no clarão */
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+}
+
+.pokemon-silhueta {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0);
+}
+
+.pokemon-revelado {
+    filter: brightness(1) !important;
+}

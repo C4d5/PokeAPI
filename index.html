@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeAPI-C4d5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <!-- O teu header -->
+        <div class="logo" onclick="mudarTela('home')">PokeAPI - C4d5</div>
+        <nav class="nav-icons">
+            <button onclick="mudarTela('pokedex')" title="pokedex">
+                 <img src="imagens/pokedex.png" alt="imagempokedex" class="img3">
+            </button>
+            <button onclick="mudarTela('game')" title="mini-game: Quem é esse Pokémon?">
+                <img src="imagens/pokebola.png" alt="imagempokebola" class="img">
+            </button>
+            <button onclick="alternarTema()" title="Mudar Tema Pokébola">
+                <img src="imagens/paleta-de-cores.png" alt="paleta" class="img2">
+            </button>
+
+            <button onclick="mudarAnunciosAleatorios()" title="Mudar Anúncios">
+                <img src="imagens/ad.png" alt="paleta" class="img5">
+            </button>
+            <button onclick="mudarTela('home')" title="main">
+                <img src="imagens/3barras.png" alt="imagem3barras" class="img4">
+            </button>
+        </nav>
+    </header>
+
+    <!-- ANÚNCIO DA ESQUERDA (Fixo na lateral esquerda) -->
+    <aside class="banner-lateral banner-esq">
+        <img id="img-anuncio-esq" src="imagens/Anuncios/dito2.png" alt="Anúncio Esquerda">
+    </aside>
+
+    <!-- ANÚNCIO DA DIREITA (Fixo na lateral direita) -->
+    <aside class="banner-lateral banner-dir">
+        <img id="img-anuncio-dir" src="imagens/Anuncios/psiduck.png" alt="Anúncio Direita">
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL (Centralizado e limpo) -->
+    <main class="content" style="max-width: 900px; margin: 0 auto; padding: 20px; box-sizing: border-box;">
+        
+        <!-- Tela Home -->
+        <section id="tela-home" class="tela">
+    <div class="home-container" style="text-align: center; max-width: 700px; margin: 0 auto; padding: 20px;">
+        
+        <h2 style="font-size: 28px; color: #cc0000; text-shadow: 2px 2px #ffcb05; margin-bottom: 15px;">
+            Bem-vindo ao PokeAPI!
+        </h2>
+        
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
+            Este é um projeto feito para estudo e testes de engenharia web. O meu foco principal foi a <strong>experiência do utilizador</strong>, recheando o site com coisas legais para se fazer e anúncios interativos em formato de banners. 
+            A intenção aqui foi criar algo muito mais divertido e interessante de se usar do que necessariamente focado num design certinho ou tradicional!
+        </p>
+
+
+        <!-- Caixa de Destaque das Funcionalidades -->
+        <div class="features-box" style="background: #fff8e1; border: 2px dashed #fbc02d; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <h3 style="margin-top: 0; color: #f57c00; text-align: center; margin-bottom: 12px;">🕹️ O que podes explorar por aqui:</h3>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                <li><strong>Pokédex Dinâmica:</strong> Consulta centenas de criaturas puxadas em tempo real da PokeAPI, com barra de pesquisa instantânea.</li>
+                <li><strong>Mini-Game "Quem é esse Pokémon?":</strong> Testa a tua memória e intuição adivinhando o Pokémon escondido sob a silhueta preta!</li>
+                <li><strong>Sistema de Anúncios Estilo Anos 2000:</strong> Banners laterais rotativos que mudam sozinhos a cada 10 minutos (ou podes baralhar tudo manualmente com o botão do dado no topo).</li>
+                <li><strong>Alternador de Temas:</strong> Personaliza a paleta de cores ao teu gosto enquanto navegas.</li>
+            </ul>
+        </div>
+
+        <p style="font-size: 18px; font-weight: bold; color: #3b5ca8; margin-top: 20px;">
+            Usa os ícones no topo para saltar entre as secções e diverte-te à grande!
+        </p>
+        
+    </div>
+</section>
+
+        <!-- Tela Jogo -->
+<section id="tela-game" class="tela hidden">
+    <div style="text-align: center; max-width: 10000px; margin: 0 auto; padding: 20px;">
+        <h2 style="font-size: 32px; margin-bottom: 20px; text-shadow: 2px 2px #ffcb05;">Quem é esse Pokémon?</h2>
+
+        <!-- Área das Dicas -->
+<div id="game-dicas-container" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap;">
+    <button onclick="revelarDica('tipo')" style="padding: 8px 12px; background: #3b5ca8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">💡 Dica: Tipo</button>
+    <button onclick="revelarDica('letras')" style="padding: 8px 12px; background: #3b5ca8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">💡 Dica: Letras</button>
+    <button onclick="revelarDica('evolucao')" style="padding: 8px 12px; background: #3b5ca8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">💡 Dica: Evolução</button>
+</div>
+
+<!-- Onde a dica vai aparecer quando for pedida -->
+<p id="game-dica" style="font-size: 18px; color: #333; font-weight: bold; min-height: 28px; margin-bottom: 15px;"></p>
+        
+        <!-- Caixa principal grande com a imagem de fundo -->
+        <!-- Caixa principal grande com a imagem de fundo -->
+        <div class="whos-that-pokemon-box">
+            <!-- Espaço fixo invisível que segura o tamanho exato do Pokémon -->
+            <div class="pokemon-slot-fixo">
+                <img id="game-img" src="imagens/quemépokemon.jpg" alt="Quem é este Pokémon?" class="pokemon-silhueta">
+            </div>
+        </div>
+
+        <!-- Mensagem de feedback -->
+        <p id="game-mensagem" style="font-size: 22px; font-weight: bold; min-height: 30px; margin: 20px 0;"></p>
+
+        <!-- Controles maiores -->
+        <div id="game-controles" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
+            <input type="text" id="game-input" placeholder="Nome do Pokémon..." style="padding: 14px; width: 300px; border-radius: 8px; border: 2px solid #3b5ca8; font-size: 18px; outline: none;" onkeypress="if(event.key === 'Enter') verificarRespostaGame()">
+            <button onclick="verificarRespostaGame()" style="padding: 14px 28px; background: #ffcb05; border: 2px solid #000; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">Responder</button>
+        </div>
+        <button id="btn-proximo-game" onclick="iniciarNovoJogo()" style="display: none; margin: 20px auto 0 auto; padding: 14px 35px; background: #2e7d32; color: white; border: 2px solid #fff; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px;">Próximo Pokémon ➡️</button>
+    </div>
+</section>
+
+        <!-- Tela Pokédex -->
+        <section id="tela-pokedex" class="tela hidden">
+            <h2 style="text-align: center;">| Pokedex | Nome & Número </h2>
+            
+            <div class="search-bar-container">
+                <input type="text" id="input-pesquisa" placeholder="Pesquisar Pokémon por nome ou número..." oninput="filtrarPokemons()">
+            </div>
+
+            <div id="grid-pokemons" class="pokemon-grid"></div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 PokeAPI - C4d5. Desenvolvido para fins de aprendizado.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

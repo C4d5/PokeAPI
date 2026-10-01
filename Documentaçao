@@ -1,0 +1,89 @@
+Com certeza! Fazer a documentação técnica detalhada antes de avançar mais no código é uma excelente prática de desenvolvimento. Ela serve como o "manual de engenharia" do seu projeto, detalhando os requisitos, o fluxo de dados, a arquitetura e a especificação das telas.
+
+Aqui está a Documentação Técnica Detalhada do PokeApp, pronta para guiar o desenvolvimento completo:
+
+📄 Documentação Técnica do Projeto: PokeApp (Mini-Game & Catálogo)
+1. Visão Geral do Sistema
+O PokeApp é uma aplicação web client-side (SPA simples) desenvolvida com HTML5, CSS3 e JavaScript (Vanilla) que consome a PokeAPI oficial. O aplicativo oferece duas frentes principais: um mini-game de adivinhação de silhuetas e um catálogo iterativo (Pokédex).
+
+2. Arquitetura e Estrutura de Arquivos
+Plaintext
+/pokeapp
+│
+├── index.html       # Arquivo único de marcação contendo as três views (Menu, Jogo, Catálogo)
+├── style.css        # Folha de estilos global baseada em Flexbox/Grid e utilitários de UI
+└── script.js        # Core lógico: gerenciador de estados, requisições HTTP assíncronas e DOM
+3. Especificação de Módulos e Componentes
+3.1. Gerenciamento de Estado Global (Views)
+A aplicação alterna entre telas controlando classes CSS (.hidden) via JavaScript:
+
+View Menu (#menu-container): Estado inicial que exibe as opções de navegação.
+
+View Mini-Game (#game-container): Estado interativo de adivinhação.
+
+View Catálogo (#catalog-container): Estado de listagem e consulta.
+
+3.2. Módulo 1: Mini-Game ("Quem é esse Pokémon?")
+Fluxo de Execução:
+Sorteio:
+
+Função gera um número inteiro aleatório entre 1 e 1025 (limite atual da PokeAPI).
+
+Requisição de Dados (Fetch API):
+
+Endpoint Principal: GET [https://pokeapi.co/api/v2/pokemon/](https://pokeapi.co/api/v2/pokemon/){id}
+
+Endpoint de Espécie: GET response.species.url (para rastrear a árvore de evolução).
+
+Endpoint de Evolução: GET species_response.evolution_chain.url (para calcular contagem de evoluções).
+
+Renderização Visual:
+
+O elemento <img> recebe a URL oficial do sprite (official-artwork ou front_default).
+
+Aplicação da classe CSS .silhouette contendo filter: brightness(0); para ocultar os traços do Pokémon.
+
+Sistema de Dicas Progressivas (nivelDica de 1 a 4):
+
+Nível 1: Exibe o(s) tipo(s) primário e secundário.
+
+Nível 2: Informa o comprimento da string do nome (length).
+
+Nível 3: Revela o primeiro e o último caractere do nome.
+
+Nível 4: Informa o número total de nós/evoluções na árvore genealógica do Pokémon.
+
+Validação de Palpite:
+
+O usuário digita o palpite no input (#palpite-input).
+
+O texto é normalizado (trim().toLowerCase()) e comparado com o nome guardado no estado global.
+
+Se Acertar / Desistir:
+
+Remove a classe .silhouette da imagem (revelando cores reais).
+
+Desativa o campo de texto.
+
+Exibe o feedback de vitória/derrota com ID, Nome e Tipos formatados.
+
+Habilita o botão "Próximo Pokémon".
+
+3.3. Módulo 2: Catálogo / Pokédex
+Fluxo de Execução:
+Requisição de Listagem:
+
+Endpoint: GET [https://pokeapi.co/api/v2/pokemon?limit=151](https://pokeapi.co/api/v2/pokemon?limit=151) (ou limite customizável).
+
+Construção de Cards:
+
+Para cada item retornado, calcula-se o ID com base no índice.
+
+Criação dinâmica de elementos estruturados em Grid (#lista-catalogo).
+
+Cada card exibe: Número da Pokédex, sprite estático oficial e nome capitalizado.
+
+4. Tratamento de Erros e Casos de Borda
+Falha de Conexão / API Fora do Ar: Envolvimento de blocos try/catch nas chamadas async/await para evitar travamentos de script, exibindo mensagens amigáveis na interface caso a PokeAPI falhe.
+
+Sensibilidade a Maiúsculas/Minúsculas: Tratamento automático de strings no input do mini-game para aceitar palpites independentemente de o usuário digitar com letras maiúsculas ou acentos comuns.
